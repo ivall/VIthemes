@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% include 'css_modal.html' %}
+
+    <div class="card p-4 justify-center col">
+        {% if not theme.approved %}
+        <div class="alert alert-warning" role="alert">
+          Ten motyw nie został jeszcze zaakceptowany, więc nie pokazuje się publicznie. Jeżeli zostanie odrzucony to równocześnie zostanie usunięty.
+        </div>
+        {% endif %}
+        <div class="d-flex flex-row flex-wrap">
+            <img src="{{ theme.image }}" class="rounded" alt="Zdjęcie pokazujące motyw" width="700" height="400">
+            <div class="ms-5 d-flex flex-column">
+                <h1>{{ theme.name }}</h1>
+                <p>ID: <code id="uuid">{{ theme.uuid }}</code></p>
+                <p>
+                    Głosy:
+                    {% if theme.count_votes.2 < 0 %}
+                        <span class="text-danger">{{ theme.count_votes.2 }}</span>
+                    {% elif theme.count_votes.2 == 0%}
+                        <span>{{ theme.count_votes.2 }}</span>
+                    {% else %}
+                         <span class="text-success">{{ theme.count_votes.2 }}</span>
+                    {% endif %}
+                </p>
+                <p>Autor: <code>{{ theme.user.username }}</code></p>
+                <p>Utworzony: <code>{{ theme.created_at|date:"H:i:s d.m.Y" }}</code></p>
+                <p>Kolor główny: {% if theme.primary_color %}<code style="color: {{ theme.primary_color }};">{{ theme.primary_color }}</code> <code style="color: {{ theme.primary_color }}; background: black;">{{ theme.primary_color }}</code></p>{% else %}<code>brak</code>{% endif %}
+                <p>Wspierane motywy: <code>{{ theme.get_supported_theme_display }}</code></p>
+                <div class="row">
+                    <button type="button" class="btn btn-primary col" data-bs-toggle="modal" data-bs-target="#cssModal">
+                      Sprawdź kod CSS
+                    </button>
+                    {% if user == theme.user %}
+                    <a type="button" class="btn btn-primary col" href="/themes/edit/{{ theme.uuid }}">
+                      Edytuj
+                    </a>
+                    {% endif %}
+                </div>
+                {% if user.is_authenticated %}
+                <div class="btn-group mt-4">
+                    <form method="POST" action="vote">
+                        {% csrf_token %}
+                        <input type="hidden" name="vote_type" value="upvote">
+                        <button type="submit" {% if vote and vote.choice == 'upvote' %} class="btn btn-success" {% else %}class="btn btn-outline-success"{% endif %}>Lubię</button>
+                    </form>
+                    <form method="POST" action="vote" class="ms-2">
+                        {% csrf_token %}
+                        <input type="hidden" name="vote_type" value="downvote">
+                        <button  {% if vote and vote.choice == 'downvote' %} class="btn btn-danger" {% else %}class="btn btn-outline-danger"{% endif %}>Nie lubię</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col p-2" style="white-space: pre-line;">
+            <p>{{ theme.description }}</p>
+        </div>
+    </div>
+
+    <script>
+        const uuid = document.getElementById("uuid");
+
+        uuid.onclick = function() {
+          document.execCommand("copy");
+        }
+
+        uuid.addEventListener("copy", function(event) {
+          event.preventDefault();
+          if (event.clipboardData) {
+            event.clipboardData.setData("text/plain", uuid.textContent);
+            notyf.success('UUID zostało skopiowane do schowka');
+          }
+        });
+    </script>
+{% endblock %}

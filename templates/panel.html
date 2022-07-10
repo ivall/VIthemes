@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1 class="text-center">Panel administratora</h1>
+<div class="d-flex flex-row flex-wrap justify-center">
+    {% for theme in themes %}
+        <div class="m-3">
+            {% include 'theme_card.html' %}
+            <form method="POST" action="panel/approve" class="d-flex flex-column justify-center">{% csrf_token %}
+                <input type="hidden" name="theme_uuid" value="{{ theme.uuid }}">
+                Rodzaj akcji
+                <select name="approved" class="form-select">
+                    <option value="approve">Zatwierdź</option>
+                    <option value="deny">Odrzuć</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Wykonaj</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

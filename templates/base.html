@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>VIthemes - motywy dla itemshopu VIshop.pl</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ivall">
+    <meta name="description" content="VIthemes to rynek darmowych motywów stworzonych dla darmowego itemshopu serwerów Minecraft - VIshop.pl">
+    <meta name="keywords" content="minecraft, itemshop, vishop, vithemes, ivshop, itemshop minecraft, darmowy itemshop, sklep minecraft, sklep, darmowy itemshop minecraft, sklep, shop, itemshop, minecraft, ivall">
+    <meta property="og:site_name" content="VIthemes">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VIthemes - motywy dla itemshopu VIshop.pl">
+    <meta property="og:description" content="VIthemes to rynek darmowych motywów stworzonych dla darmowego itemshopu serwerów Minecraft - VIshop.pl">
+    <meta name="theme-color" content="#009eb1">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+</head>
+<body>
+{% include 'navbar.html' %}
+<div class="container mt-3">
+{% block body %}
+{% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+<script>
+    var notyf = new Notyf({
+      duration: 3000,
+      position: {
+        x: 'right',
+        y: 'bottom',
+      },
+    });
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>notyf.{{ message.tags }}('{{ message }}')</script>
+    {% endfor %}
+{% endif %}
+</body>
+</html>

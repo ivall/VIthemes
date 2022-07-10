@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1 class="text-center">Twoje motywy:</h1>
+<div class="d-flex flex-row flex-wrap justify-center">
+    {% for theme in themes %}
+        <div class="m-3">
+            {% include 'theme_card.html' %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

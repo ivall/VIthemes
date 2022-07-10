@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="container mx-auto">
+    <header class="text-center mt-5 mb-5 max-w-none">
+        {% if 'edit' in request.path %}
+            <h1>Edytowanie motywu</h1>
+        {% else %}
+            <h1>Dodawanie motywu</h1>
+        {% endif %}
+    </header>
+
+    <form method="post" class="card d-block p-5">{% csrf_token %}
+
+        <div class="form-group">
+          <label for="{{ form.name.id_for_label }}" class="form-label">Nazwa motywu</label>
+          <input required type="text" maxlength="16" class="form-control" name="name" id="{{ form.name.id_for_label }}" {% if form.is_bound or form.name.value %}value="{{ form.name.value }}"{% endif %}>
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.image.id_for_label }}" class="form-label">Zdjęcie pokazujące motyw</label>
+          <input required type="url" class="form-control" name="image" id="{{ form.image.id_for_label }}" {% if form.is_bound or form.image.value %}value="{{ form.image.value }}"{% endif %}>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}" class="form-label">Opis motywu</label>
+            <textarea required maxlength="2048" class="form-control" name="description" id="{{ form.description.id_for_label }}">{% if form.is_bound or form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.primary_color.id_for_label }}" class="form-label">Kolor główny motywu (HEX np. <b>#123123</b>) (<b>Nie jest wymagany</b>) (Zmienia kolor tekstu, przycisków, nawigacji)</label>
+            <input type="text" maxlength="7" class="form-control" name="primary_color" id="{{ form.primary_color.id_for_label }}" {% if form.is_bound or form.primary_color.value %}value="{{ form.primary_color.value }}"{% endif %}>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.css.id_for_label }}" class="form-label">CSS (pamiętaj, że CSS daje ogromne możliwości, możesz nim wpłynąć na wygląd całej strony)</label>
+            <textarea required class="form-control" name="css" id="{{ form.css.id_for_label }}">{% if form.is_bound or form.css.value %}{{ form.css.value }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="{{ form.supported_theme.id_for_label }}">Wspierane motywy</label>
+            <select class="form-select" aria-label="Wspierane motywy" id="{{ form.supported_theme.id_for_label }}" name="supported_theme">
+                {% for value, text in form.supported_theme.field.choices %}
+                    <option value="{{ value }}" {% if form.supported_theme.value == value %}selected{% endif %}>{{ text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        {% include 'recaptcha.html' %}
+
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary mt-2">
+          {% if 'edit' in request.path %}
+              Edytuj motyw
+          {% else %}
+              Dodaj motyw
+          {% endif %}
+      </button>
+    </form>
+</div>
+{% endblock %}
