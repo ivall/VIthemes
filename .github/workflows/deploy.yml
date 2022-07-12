@@ -29,5 +29,5 @@ jobs:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
-        PASSWORD: ${{ secrets.SSHKEY }}
+        KEY: ${{ secrets.SSHKEY }}
         script: sudo systemctl restart gunicorn.socket & sudo systemctl restart gunicorn.service
