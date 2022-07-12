@@ -18,7 +18,7 @@ jobs:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        key: ${{ secrets.SSHKEY }}
       with:
         source: "vithemes"
         target: "/home/ubuntu/vithemes/"
@@ -29,5 +29,5 @@ jobs:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        key: ${{ secrets.SSHKEY }}
         script: sudo systemctl restart gunicorn.socket & sudo systemctl restart gunicorn.service
