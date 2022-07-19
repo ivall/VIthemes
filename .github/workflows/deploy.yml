@@ -30,4 +30,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         PASSWORD: ${{ secrets.PASSWORD }}
-        script: sudo systemctl restart gunicorn.socket & sudo systemctl restart gunicorn.service
+        script: sudo systemctl restart gunicorn.socket & sudo systemctl restart gunicorn.service & source /home/ubuntu/vithemes/vithemesenv/bin/activate & cd /home/ubuntu/vithemes/vithemes/ & python manage.py migrate
