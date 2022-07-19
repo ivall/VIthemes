@@ -20,8 +20,8 @@ jobs:
         PORT: ${{ secrets.PORT }}
         PASSWORD: ${{ secrets.PASSWORD }}
       with:
-        source: "vithemes"
-        target: "/home/ubuntu/vithemes/"
+        source: "."
+        target: "/home/ubuntu/vithemes/vithemes/"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
