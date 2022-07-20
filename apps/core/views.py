@@ -147,11 +147,9 @@ def edit(request, theme_uuid=None, template_name='create_theme.html'):
 
     form = CreateThemeForm(request.POST or None, instance=theme)
     if request.POST and form.is_valid():
-        theme = form.save(commit=False)
-        theme.approved = False
-        theme.save()
+        theme = form.save(commit=True)
         success_url = f'/themes/{theme.uuid}'
-        messages.add_message(request, messages.SUCCESS, 'Motyw został edytowany, oczekuje on teraz na zatwierdzenie.')
+        messages.add_message(request, messages.SUCCESS, 'Motyw został edytowany.')
         return redirect(success_url)
     elif request.POST and not form.is_valid():
         errors = get_form_errors(form)
