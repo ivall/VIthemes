@@ -3,27 +3,36 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <h1 class="text-center">VIthemes - motywy dla itemshopu <a href="https://vishop.pl" target="_blank">VIshop.pl</a></h1>
-    <div class="most-popular-section swiper mt-4">
+    <div class="most-popular-section swiper mt-4 swiper-container">
         <h2>Najbardziej lubiane motywy</h2>
         <div class="most-popular-content d-flex flex-row justify-center swiper-wrapper">
         {% for theme in popular_themes %}
-            {% include 'theme_slider.html' %}
+            {% include 'theme_card.html' %}
         {% endfor %}
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 
-    <div class="newest-section mt-4 swiper">
+    <div class="newest-section mt-4 swiper swiper-container">
         <h2>Najnowsze motywy</h2>
         <div class="newest-content d-flex flex-row justify-center swiper-wrapper">
             {% for theme in themes|dictsortreversed:"created_at" %}
-                {% include 'theme_slider.html' %}
+                {% include 'theme_card.html' %}
             {% endfor %}
         </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 
     <script>
       var swiper = new Swiper(".swiper", {
         slidesPerView: 4,
         freeMode: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
         spaceBetween: 50,
         breakpoints: {
             0: {
