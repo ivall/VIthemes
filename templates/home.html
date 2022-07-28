@@ -7,7 +7,7 @@
         <h2>Najbardziej lubiane motywy</h2>
         <div class="most-popular-content d-flex flex-row justify-center swiper-wrapper">
         {% for theme in popular_themes %}
-            {% include 'theme_slider.html' %}
+            {% include 'theme_card.html' %}
         {% endfor %}
     </div>
 
@@ -15,7 +15,7 @@
         <h2>Najnowsze motywy</h2>
         <div class="newest-content d-flex flex-row justify-center swiper-wrapper">
             {% for theme in themes|dictsortreversed:"created_at" %}
-                {% include 'theme_slider.html' %}
+                {% include 'theme_card.html' %}
             {% endfor %}
         </div>
     </div>

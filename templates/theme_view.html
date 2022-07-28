@@ -20,7 +20,7 @@
                     {% elif theme.count_votes.2 == 0%}
                         <span>{{ theme.count_votes.2 }}</span>
                     {% else %}
-                         <span class="text-success">{{ theme.count_votes.2 }}</span>
+                         <span class="text-success">+{{ theme.count_votes.2 }}</span>
                     {% endif %}
                 </p>
                 <p>Autor: <code>{{ theme.user.username }}</code></p>
