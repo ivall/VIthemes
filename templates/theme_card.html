@@ -3,7 +3,7 @@
         <div class="card" style="width: 18rem;">
           <img class="card-img-top" style="object-fit: cover; height: 20vh;" src="{{ theme.image }}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{ theme.name }} ({% if theme.count_votes.2 < 0 %}<span class="text-danger">{{theme.count_votes.2}}</span>{% elif theme.count_votes.2 == 0%}<span>{{theme.count_votes.2}}</span>{% else %}<span class="text-success">{{theme.count_votes.2}}</span>{% endif %})
+            <h5 class="card-title">{{ theme.name }} ({% if theme.count_votes.2 < 0 %}<span class="text-danger">{{theme.count_votes.2}}</span>{% elif theme.count_votes.2 == 0%}<span>{{theme.count_votes.2}}</span>{% else %}<span class="text-success">+{{theme.count_votes.2}}</span>{% endif %})
             </h5>
             <p class="card-text text-truncate">{{ theme.description }}</p>
             <a href="/themes/{{ theme.uuid }}" class="btn btn-primary">Zobacz</a>
