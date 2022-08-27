@@ -7,5 +7,5 @@ class ThemeSerializer(ModelSerializer):
 
     class Meta:
         model = Theme
-        fields = ['primary_color', 'css']
+        fields = ['primary_color', 'css', 'supported_theme']
         read_only_fields = fields
