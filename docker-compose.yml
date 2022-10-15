@@ -7,6 +7,8 @@ services:
       - .:/opt/services/vithemes/src
       - static_volume:/opt/services/vithemes/static
       - media_volume:/opt/services/vithemes/media
+      - ./sqlite.db:/home/ubuntu/vithemes/vithemes/sqlite.db
+      - ./config.py:/home/ubuntu/vithemes/vithemes/config.py
     networks:
       - nginx_network
 
