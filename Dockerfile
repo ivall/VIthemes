@@ -8,7 +8,7 @@ COPY requirements.txt /opt/services/vithemes/src/
 RUN pip install -r requirements.txt
 
 COPY . /opt/services/vithemes/src
-RUN python manage.py collectstatic --no-input -v 2
+RUN python manage.py migrate
 
 EXPOSE 80
 
