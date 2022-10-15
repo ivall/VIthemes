@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  vithemes:
+    build: .
+    volumes:
+      - .:/opt/services/vithemes/src
+      - static_volume:/opt/services/vithemes/static
+      - media_volume:/opt/services/vithemes/media
+    networks:
+      - nginx_network
+
+  nginx:
+    image: pagespeed/nginx-pagespeed:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static_volume:/opt/services/vithemes/static
+      - media_volume:/opt/services/vithemes/media
+    depends_on:
+      - vithemes
+    networks:
+      - nginx_network
+
+networks:
+  nginx_network:
+    driver: bridge
+
+volumes:
+  static_volume:
+  media_volume:
