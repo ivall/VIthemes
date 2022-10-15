@@ -7,7 +7,7 @@ WORKDIR /opt/services/vithemes/src
 COPY requirements.txt /opt/services/vithemes/src/
 RUN pip install -r requirements.txt
 
-COPY . /opt/services/vithemes/src
+COPY /home/ubuntu/vithemes/vithemes /opt/services/vithemes/src
 RUN python manage.py migrate
 
 EXPOSE 80
